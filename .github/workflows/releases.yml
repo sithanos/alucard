@@ -39,15 +39,21 @@ jobs:
       - name: Check Helm version
         run: helm version
 
-      - name: Extract Version from Chart.yaml
+
+
+      - name: Extract Version and Description from Chart.yaml
         id: versioning
         run: |
           # Extract the version from Chart.yaml
           current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')
+          # Extract the description from Chart.yaml
+          description=$(grep '^description:' ./charts/alucard/Chart.yaml | sed 's/description: //')
           
-          # Set the version as an output
-          echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
+          # Set the version and description as outputs
+          echo "EXIST_VERSION=$current_version" >> $GITHUB_ENV
+          echo "DESCRIPTION=$description" >> $GITHUB_ENV
           echo "::set-output name=version::$current_version"
+          echo "::set-output name=description::$description"
           
       - name: Create Git Tag
         run: |
@@ -56,14 +62,44 @@ jobs:
           git tag "alucard-${{ steps.versioning.outputs.version }}"
           git push origin "alucard-${{ steps.versioning.outputs.version }}"
 
+      # - name: Package Helm Chart
+      #   run: |
+      #     helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
+      #     helm repo index --url tstable --merge index.yaml .
+      #     git add .
+      #     git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
+      #     git push https://${USER_NAME}:${USER_TOKEN}@$GITHUB_SERVER_URL/$GITHUB_REPOSITORY
+
       - name: Package Helm Chart
         run: |
           helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
-          helm repo index --url tstable --merge index.yaml .
+          helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
-          git push https://${USER_NAME}:${USER_TOKEN}@$GITHUB_SERVER_URL/$GITHUB_REPOSITORY
-        
+          git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@$GITHUB_SERVER_URL/$GITHUB_REPOSITORY
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+        with:
+          tag_name: "alucard-${{ steps.versioning.outputs.version }}"
+          release_name: "alucard-${{ steps.versioning.outputs.version }}"
+          body: "${{ steps.versioning.outputs.description }}"
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./stable/alucard-*.tgz
+          asset_name: alucard-${{ steps.versioning.outputs.version }}.tgz
+          asset_content_type: application/gzip
+
   # # Release into ArtifactHub
   # stage-publisher:
   #   runs-on: ubuntu-latest
