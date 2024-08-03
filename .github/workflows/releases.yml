@@ -1,34 +1,16 @@
 name: ArtifactHub Release Charts
 
 on:
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types: [requested]
+  push:
     branches:
       - main
-
-# on:
-#   push:
-#     branches:
-#       # - main
-#       # - "*"
-#     tags:
-#       - 'alucard-[0-9]+.[0-9]+.[0-9]+'
-#       - 'alucard-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
-  # pull_request:
-  #   branches:
-      # - main
-      # - "*"
-    # tags:
-    #   - 'alucard-[0-9]+.[0-9]+.[0-9]+'
-    #   - 'alucard-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
 
 jobs:
   # Lint and Test HelmCharts
   stage-lint-test:
     runs-on: ubuntu-latest
     permissions:
-      contents: read    
+      contents: read
     continue-on-error: false
     container:
       image: artifacthub/ah
@@ -42,8 +24,6 @@ jobs:
 
   # Release into ArtifactHub
   stage-publisher:
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     runs-on: ubuntu-latest
     permissions:
       contents: write
