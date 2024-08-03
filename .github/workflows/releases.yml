@@ -1,4 +1,4 @@
-name: ArtifactHub Release Charts
+name: ArtifactHub Publisher Charts
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  # Lint and Test HelmCharts
+  # Stage Lint and Test HelmCharts
   stage-lint-test:
     runs-on: ubuntu-latest
     permissions:
@@ -16,15 +16,17 @@ jobs:
       image: artifacthub/ah
       options: --user 1001
     steps:
+    
       # Check out the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4.1.7
+        
       # Run the ArtifactHub linter on the Helm charts
       - name: Run ah lint
         working-directory: charts/alucard
         run: ah lint
 
-  # Release into ArtifactHub
+  # Stage Publish into ArtifactHub
   stage-publisher:
     runs-on: ubuntu-latest
     permissions:
@@ -32,9 +34,11 @@ jobs:
     continue-on-error: false
     needs: stage-lint-test
     steps:
+    
       # Check out the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4.1.7
+        
       # Install Helm with the latest version        
       - name: Helm tool installer
         uses: azure/setup-helm@v4.2.0
@@ -42,6 +46,7 @@ jobs:
           version: latest
         env:
           GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+          
       # Verify that Helm is installed and print the version
       - name: Check Helm version
         run: helm version
@@ -94,7 +99,6 @@ jobs:
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
-
 
       # Verify that the packaged Helm chart .tgz file exists
       - name: Verify .tgz File Exists
