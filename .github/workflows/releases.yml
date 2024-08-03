@@ -16,9 +16,9 @@ jobs:
   # Lint and Test HelmCharts
   stage-lint-test:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: read
-    # continue-on-error: false
+    permissions:
+      contents: read
+    continue-on-error: false
     container:
       image: artifacthub/ah
       options: --user 1001
@@ -28,6 +28,38 @@ jobs:
       - name: Run ah lint
         working-directory: charts/alucard
         run: ah lint
+        
+  # Release into ArtifactHub
+  stage-publisher:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    continue-on-error: false
+    needs: stage-lint-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v3
+      - name: Check Helm version
+        run: helm version
+      - name: Package Helm Chart
+        run: |
+          cd ./stable
+          helm package --version ${GITHUB_REF#refs/tags/} ./charts/alucard
+      - name: Copy chart file
+        run: |
+          mkdir -p 
+          cp ${{ github.workspace }}/alucard-${GITHUB_REF#refs/tags/}.tgz ./stable
+      - name: Update chart repo index in gh-pages branch
+        run: |
+          cd ./stable
+          helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
+          git config --local user.email "${{ secrets.USER_EMAIL }}"
+          git config --local user.name "${{ secrets.USER_NAME }}"
+          git add .
+          git commit -m "feat: Update chart index with version ${GITHUB_REF#refs/tags/}"
+          git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git HEAD:main -
 
   # # Release into ArtifactHub
   # stage-publisher:
@@ -52,30 +84,30 @@ jobs:
 
 
 
-  # Fetch from ArtifactHub
-  stage-fetch:
-    runs-on: ubuntu-latest
-    # permissions:
-    #   contents: write
-    # continue-on-error: false
-    # needs: stage-publisher
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Configure Git
-        run: |
-          git config user.name "$USER_NAME"
-          git config user.email "$USER_EMAIL"
-      - name: Install Helm
-        uses: azure/setup-helm@v4
-        env:
-          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:          
-          charts_dir: charts/alucard
-          config: charts/assets/cr.yaml
-        env:
-          CR_TOKEN: "${{ secrets.USER_TOKEN }}"
+  # # Fetch from ArtifactHub
+  # stage-fetch:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-publisher
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Configure Git
+  #       run: |
+  #         git config user.name "$USER_NAME"
+  #         git config user.email "$USER_EMAIL"
+  #     - name: Install Helm
+  #       uses: azure/setup-helm@v4
+  #       env:
+  #         GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+  #     - name: Run chart-releaser
+  #       uses: helm/chart-releaser-action@v1.6.0
+  #       with:          
+  #         charts_dir: charts/alucard
+  #         config: charts/assets/cr.yaml
+  #       env:
+  #         CR_TOKEN: "${{ secrets.USER_TOKEN }}"
