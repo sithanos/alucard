@@ -1,4 +1,4 @@
-name: Linting and Testing
+name: ArtifactHub Lint and Test
 on:
   push:
     branches: "*"
@@ -9,14 +9,14 @@ permissions:
   contents: read
 
 jobs:
-  linter-artifacthub:
+  lint-test:
     runs-on: ubuntu-latest
     container:
-      image: public.ecr.aws/artifacthub/ah:v1.14.0
+      image: artifacthub/ah
       options: --user 1001
     steps:
-      - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Checkout code
+        uses: actions/checkout@master
       - name: Run ah lint
         working-directory: ./charts/alucard
         run: ah lint
