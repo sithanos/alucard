@@ -1,4 +1,4 @@
-# Alucard Helm Charts - Nothing lasts forever, we can change the future.
+# Alucard Helm Charts
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/alucard)](https://artifacthub.io/packages/search?repo=alucard)
 
 ## Overview
@@ -275,4 +275,5 @@ This project is licensed under the [MIT License](./LICENSE).
 ```
 
 Remember to replace the placeholder URLs, names, and images with your actual details. Customize the sections as needed for your specific Helm Chart.
+
 ```
