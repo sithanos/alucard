@@ -1,4 +1,4 @@
 owner: sithanos
 git-repo: charts/alucard
-package-path: .
+package-path: stable
 skip_existing: true
