@@ -1,6 +1,6 @@
 owner: xhilmi
 make-release-latest: true
 package-path: stable
-packages-with-index: true
+# packages-with-index: true
 pages-branch: main
 skip-existing: true
