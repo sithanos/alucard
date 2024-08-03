@@ -29,18 +29,15 @@ jobs:
       contents: write
     continue-on-error: false
     needs: stage-lint-test
-    container:
-      image: alpine:latest
-      options: --user 1001
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Install required tools
-        run: |
-          apk update
-          apk add --no-cache git curl tar
-          curl -fsSL https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz | tar xzvf - -C /usr/local/bin/ --strip-components=1 linux-amd64/helm
+
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v3      
+
+      - name: Check Helm version
+        run: helm version
 
       - name: Extract Version from Chart.yaml
         id: versioning
