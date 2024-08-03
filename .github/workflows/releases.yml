@@ -53,8 +53,11 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
-        with:
+        with:          
           charts_dir: charts/alucard
-          config: charts/assets/cr.yaml          
+          config: charts/assets/cr.yaml
+          mark_as_latest: true
+          packages_with_index: true
+          pages_branch: main          
         env:
           CR_TOKEN: "${{ secrets.USER_TOKEN }}"
