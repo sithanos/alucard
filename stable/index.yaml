@@ -21,6 +21,56 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
+    created: "2024-08-03T10:41:00.240882272Z"
+    description: A Helm chart to manage deployment Kubernetes
+    digest: e49b608e399fb672fee2b0fc4f98924b6ea9c5e69d06543af18facc2b83722f1
+    home: https://alucard.thanos.my.id
+    icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
+    keywords:
+    - kubernetes
+    - helm
+    - alucard
+    - krew
+    - infrastructure
+    - container
+    - images
+    - argo
+    - flux
+    - google
+    - amazon
+    - chart
+    - thanos
+    - aws
+    - gcp
+    - application
+    - app
+    - microservice
+    kubeVersion: '>= 1.23.0-0'
+    name: alucard
+    type: application
+    urls:
+    - https://sithanos.github.io/alucard/stable/alucard-1.0.6.tgz
+    version: 1.0.6
+  - annotations:
+      artifacthub.io/alternativeName: alucard
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Update Chart.yaml information
+          links:
+            - name: GitHub Repository
+              url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: source\n  url: https://sithanos.github.io/alucard\n-
+        name: support\n  url: https://thanos.my.id \n"
+      artifacthub.io/maintainers: "- name: sithanos\n  email: hello@thanos.my.id\n-
+        name: xhilmi\n  email: hilmiafifi12@gmail.com    \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
+    apiVersion: v2
+    appVersion: alucard
     created: "2024-08-03T10:32:59.782295555Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 9f21106c9a366f752680b1909adb6bf678696ce5360a8370ce2c69edb4177032
@@ -248,4 +298,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T10:32:59.780437145Z"
+generated: "2024-08-03T10:41:00.239665471Z"
