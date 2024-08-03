@@ -91,8 +91,9 @@ jobs:
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
         with:
-          token: ${{ secrets.USER_TOKEN }}
           tag_name: "alucard-${{ steps.versioning.outputs.version }}"
           release_name: "alucard-${{ steps.versioning.outputs.version }}"
           body: "${{ steps.versioning.outputs.description }}"
@@ -102,7 +103,7 @@ jobs:
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
-          USER_TOKEN: ${{ secrets.USER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./stable/alucard-${{ steps.versioning.outputs.version }}.tgz
