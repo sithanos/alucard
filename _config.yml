@@ -1,3 +1,5 @@
 theme: jekyll-theme-leap-day
 title: Alucard's homepage
 description: Bookmark this to keep an eye on my project updates!
+show_downloads: [true]
+
