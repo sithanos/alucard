@@ -1,0 +1,124 @@
+name: Repository Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Lint and Test HelmCharts
+  stage-lint-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    continue-on-error: false
+    container:
+      image: artifacthub/ah
+      options: --user 1001
+    steps:
+      # Check out the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+      # Run the ArtifactHub linter on the Helm charts
+      - name: Run ah lint
+        working-directory: charts/alucard
+        run: ah lint
+
+  # Release into ArtifactHub
+  stage-publisher:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    continue-on-error: false
+    needs: stage-lint-test
+    steps:
+      # Check out the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+      # Install Helm with the latest version        
+      - name: Helm tool installer
+        uses: azure/setup-helm@v4.2.0
+        with:
+          version: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+      # Verify that Helm is installed and print the version
+      - name: Check Helm version
+        run: helm version
+
+      # Extract chart version and description for use in subsequent steps
+      - name: Extract Version and Description from Chart.yaml
+        id: versioning
+        run: |
+          # Extract the version from Chart.yaml
+          current_version=$(grep 'version: 1.0.0' stable/index.yaml | awk '{print $2}')
+          # Extract the description from Chart.yaml
+          description=$(grep '^description:' ./charts/alucard/Chart.yaml | sed 's/description: //')
+          
+          # Set the version and description as outputs
+          echo "EXIST_VERSION=$current_version" >> $GITHUB_ENV
+          echo "DESCRIPTION=$description" >> $GITHUB_ENV
+          echo "version=$current_version" >> $GITHUB_OUTPUT
+          echo "description=$description" >> $GITHUB_OUTPUT
+
+      # Remove any existing release or tag with the same version to avoid conflicts
+      - name: Delete Existing Tag and Release if Exists
+        run: |
+          tag_name="alucard-${{ steps.versioning.outputs.version }}"
+          release_id=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/$tag_name" | jq -r '.id')
+          
+          if [ "$release_id" != "null" ]; then
+            echo "Deleting existing release with ID: $release_id"
+            curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/$release_id"
+          fi
+          
+          if git rev-parse "$tag_name" >/dev/null 2>&1; then
+            echo "Deleting existing tag: $tag_name"
+            git tag -d "$tag_name"
+            git push origin --delete "$tag_name"
+          fi
+        
+      # Create and push a new Git tag for the release
+      - name: Create Git Tag
+        run: |
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USER_NAME }}          
+          git tag "alucard-${{ steps.versioning.outputs.version }}"
+          git push -f origin "alucard-${{ steps.versioning.outputs.version }}"
+        
+      # # Package the Helm chart and update the repository index
+      # - name: Package Helm Chart
+      #   run: |
+      #     cd ./stable && helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
+      #     cd ./stable && helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
+      #     git add .
+      #     git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
+      #     git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
+
+      # Verify that the packaged Helm chart .tgz file exists
+      - name: Verify .tgz File Exists
+        run: |
+          ls -lah ./stable
+
+      # Create a new GitHub release with the specified tag, name, and description
+      - name: Create GitHub Release
+        id: create_release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          token: ${{ secrets.USER_TOKEN }}
+          tag: "alucard-${{ steps.versioning.outputs.version }}"
+          name: "alucard-${{ steps.versioning.outputs.version }}"
+          body: "${{ steps.versioning.outputs.description }}"
+          draft: false
+          prerelease: false
+
+      # Upload the packaged Helm chart as a release asset to GitHub
+      - name: Upload GitHub Release Asset
+        uses: tanyagray/action-upload-release-asset@v1.1.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./stable/alucard-${{ steps.versioning.outputs.version }}.tgz
+          asset_name: alucard-${{ steps.versioning.outputs.version }}.tgz
+          asset_content_type: application/gzip
