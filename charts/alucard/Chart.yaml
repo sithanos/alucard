@@ -22,6 +22,32 @@ version: 1.0.0
 # It is recommended to use it with quotes.
 appVersion: "alucard"
 annotations:
+  artifacthub.io/category: integration-delivery
   artifacthub.io/changes: |
     - kind: added
       description: Add custom strategy 
+  artifacthub.io/containsSecurityUpdates: "true"
+  artifacthub.io/license: MIT
+  artifacthub.io/links: |
+    - name: Official
+      url: https://sithanos.github.io/alucard
+    - name: Organization
+      url: https://alucard.thanos.my.id 
+  artifacthub.io/signKey: |
+    fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+    url: https://keybase.io/xhilmi/pgp_keys.asc
+  # artifacthub.io/images: |
+  #   - name: img1
+  #     image: repo/img1:1.0.0
+  #     platforms:
+  #       - linux/amd64
+  #   - name: img2
+  #     image: repo/img2:2.0.0
+  #     whitelisted: true
+  #     platforms:
+  #       - linux/amd64
+  # artifacthub.io/screenshots: |
+  #   - title: Sample screenshot 1
+  #     url: https://example.com/screenshot1.jpg
+  #   - title: Sample screenshot 2
+  #     url: https://example.com/screenshot2.jpg       

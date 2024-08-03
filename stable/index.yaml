@@ -2,15 +2,23 @@ apiVersion: v1
 entries:
   alucard:
   - annotations:
-      artifacthub.io/changes: "- kind: added\n  description: Add custom strategy "
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: "- kind: added\n  description: Add custom strategy \n"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: Official\n  url: https://sithanos.github.io/alucard\n-
+        name: Organization\n  url: https://alucard.thanos.my.id \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T09:21:57.471573+07:00"
+    created: "2024-08-03T10:31:41.211166+07:00"
     description: A Helm chart to manage deployment Kubernetes
-    digest: c101aca61493a737815f97d6682145041edde1b61b93c42c2a2ac89789734b44
+    digest: 6b096431e99d56f4ace4f86e9b6a96369fe854ca8ca95a7c1d0eda9b30e7744a
     name: alucard
     type: application
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T09:21:57.470242+07:00"
+generated: "2024-08-03T10:31:41.210166+07:00"
