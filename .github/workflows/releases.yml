@@ -52,22 +52,6 @@ jobs:
           echo "DESCRIPTION=$description" >> $GITHUB_ENV
           echo "::set-output name=version::$current_version"
           echo "::set-output name=description::$description"
-
-      - name: Delete Existing Tag and Release if Exists
-        run: |
-          tag_name="alucard-${{ steps.versioning.outputs.version }}"
-          release_id=$(curl -s -H "Authorization: token ${{ secrets.USER_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/$tag_name" | jq -r '.id')
-          
-          if [ "$release_id" != "null" ]; then
-            echo "Deleting existing release with ID: $release_id"
-            curl -X DELETE -H "Authorization: token ${{ secrets.USER_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/$release_id"
-          fi
-          
-          if git rev-parse "$tag_name" >/dev/null 2>&1; then
-            echo "Deleting existing tag: $tag_name"
-            git tag -d "$tag_name"
-            git push origin --delete "$tag_name"
-          fi
           
       - name: Create Git Tag
         run: |
@@ -76,13 +60,6 @@ jobs:
           git tag "alucard-${{ steps.versioning.outputs.version }}"
           git push -f origin "alucard-${{ steps.versioning.outputs.version }}"
 
-      # - name: Package Helm Chart
-      #   run: |
-      #     helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
-      #     helm repo index --url tstable --merge index.yaml .
-      #     git add .
-      #     git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
-      #     git push https://${USER_NAME}:${USER_TOKEN}@$GITHUB_SERVER_URL/$GITHUB_REPOSITORY
       - name: Package Helm Chart
         run: |
           helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
@@ -90,7 +67,6 @@ jobs:
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
-
 
       - name: Verify .tgz File Exists
         run: |
