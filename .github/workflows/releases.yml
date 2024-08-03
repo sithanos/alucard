@@ -2,9 +2,9 @@ name: ArtifactHub Release Charts
 
 on:
   push:
-    # tags:
-    #   - 'alucard-[0-9]+.[0-9]+.[0-9]+'
-    #   - 'alucard-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+    tags:
+      - 'alucard-[0-9]+.[0-9]+.[0-9]+'
+      - 'alucard-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
     branches:
       - "*"
       # - [main]
