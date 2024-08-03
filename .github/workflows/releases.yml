@@ -5,10 +5,10 @@ name: ArtifactHub Release Charts
 #     branches:
 #       - main
 
-on:
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types: [completed]
+# on:
+#   workflow_run:
+#     workflows: ["pages-build-deployment"]
+#     types: [completed]
     # branches:
     #   - main
 
