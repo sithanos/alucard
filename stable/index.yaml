@@ -3,6 +3,28 @@ entries:
   alucard:
   - annotations:
       artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: "- kind: added\n  description: Add custom strategy \n-
+        kind: fixed\n  description: Minor update values.schema.json\n  links:\n    -
+        name: GitHub Repository\n      url: https://github.com/sithanos/alucard/blob/main/charts/alucard/values.schema.json\n"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: Official\n  url: https://sithanos.github.io/alucard\n-
+        name: Organization\n  url: https://alucard.thanos.my.id \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://keybase.io/xhilmi/pgp_keys.asc
+    apiVersion: v2
+    appVersion: alucard
+    created: "2024-08-03T11:39:23.901875+07:00"
+    description: A Helm chart to manage deployment Kubernetes
+    digest: db50a15e3077b4c7499e68bf64463b5119ce0089074a2a2b85230ebbb69b72d5
+    name: alucard
+    type: application
+    urls:
+    - https://sithanos.github.io/alucard/stable/alucard-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/category: integration-delivery
       artifacthub.io/changes: "- kind: added\n  description: Add custom strategy \n"
       artifacthub.io/containsSecurityUpdates: "true"
       artifacthub.io/license: MIT
@@ -13,7 +35,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T10:48:24.348118+07:00"
+    created: "2024-08-03T11:39:23.901129+07:00"
     description: A Helm chart to manage deployment Kubernetes
     digest: 0585eec3e9d3746087bc67568d00ca674ac3796614877b436758b40db6517031
     name: alucard
@@ -21,4 +43,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T10:48:24.347286+07:00"
+generated: "2024-08-03T11:39:23.899909+07:00"
