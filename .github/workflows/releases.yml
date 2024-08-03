@@ -59,10 +59,5 @@ jobs:
         with:          
           charts_dir: charts/alucard
           config: charts/assets/cr.yaml
-          mark_as_latest: true
-          pages_branch: main
-          skip_existing: true
-          skip_packaging: false
-          skip_upload: false
         env:
           CR_TOKEN: "${{ secrets.USER_TOKEN }}"
