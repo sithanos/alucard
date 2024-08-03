@@ -31,7 +31,7 @@ jobs:
     needs: stage-lint-test
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.7
 
       - name: Helm tool installer
         uses: azure/setup-helm@v4.2.0
