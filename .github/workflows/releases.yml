@@ -51,8 +51,8 @@ jobs:
           
       - name: Create Git Tag
         run: |
-          git config --global user.email "$USER_EMAIL"
-          git config --global user.name "$USER_NAME"
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USER_NAME }}          
           git tag "alucard-${{ steps.versioning.outputs.version }}"
           git push origin "alucard-${{ steps.versioning.outputs.version }}"
 
