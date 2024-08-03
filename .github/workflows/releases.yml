@@ -39,44 +39,44 @@ jobs:
     # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
     # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     runs-on: ubuntu-latest
-    
-    # steps:
-    #   - uses: actions/checkout@v2
-    #   - name: Publish Helm charts
-    #     uses: stefanprodan/helm-gh-pages@master
-    #     with:
-    #       token: ${{ secrets.USER_TOKEN }}
-    #       charts_dir: charts
-    #       charts_url: https://sithanos.github.io/alucard
-    #       owner: sithanos
-    #       repository: alucard
-    #       branch: main
-    #       target_dir: stable          
-
     permissions:
       contents: write
     continue-on-error: false
     needs: stage-lint-test
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@master
         with:
-          fetch-depth: 0
-
-      - name: Configure Git
-        run: |
-          git config user.name "$USER_NAME"
-          git config user.email "$USER_EMAIL"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v4
-        env:
-          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:          
+          token: ${{ secrets.USER_TOKEN }}
           charts_dir: charts/alucard
-          config: charts/assets/cr.yaml
-        env:
-          CR_TOKEN: "${{ secrets.USER_TOKEN }}"
+          charts_url: https://sithanos.github.io/alucard
+          owner: sithanos
+          repository: alucard
+          branch: main
+          target_dir: stable          
+
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v3
+    #     with:
+    #       fetch-depth: 0
+
+    #   - name: Configure Git
+    #     run: |
+    #       git config user.name "$USER_NAME"
+    #       git config user.email "$USER_EMAIL"
+
+    #   - name: Install Helm
+    #     uses: azure/setup-helm@v4
+    #     env:
+    #       GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+
+    #   - name: Run chart-releaser
+    #     uses: helm/chart-releaser-action@v1.6.0
+    #     with:          
+    #       charts_dir: charts/alucard
+    #       config: charts/assets/cr.yaml
+    #     env:
+    #       CR_TOKEN: "${{ secrets.USER_TOKEN }}"
