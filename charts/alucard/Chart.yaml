@@ -26,7 +26,7 @@ kubeVersion: ">= 1.23.0-0"
 
 # Other Customizeable
 home: https://alucard.thanos.my.id
-icon: https://sithanos.github.io/alucard/assets/alucard.png
+icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
 
 # Keywords
 keywords:
@@ -58,7 +58,7 @@ annotations:
       description: Update values.yaml information
       links:
         - name: GitHub Repository
-          url: https://sithanos.github.io/alucard/alucard/values.yaml
+          url: https://sithanos.github.io/alucard/charts/alucard/values.yaml
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
