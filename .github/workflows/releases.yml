@@ -68,14 +68,14 @@ jobs:
         run: |
           git config user.name "$USER_NAME"
           git config user.email "$USER_EMAIL"
-      # - name: Install Helm
-      #   uses: azure/setup-helm@v4
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:          
-          charts_dir: charts/alucard/Chart.yaml
+          charts_dir: charts/alucard
           config: charts/assets/cr.yaml
         env:
           CR_TOKEN: "${{ secrets.USER_TOKEN }}"
