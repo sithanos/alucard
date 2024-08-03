@@ -43,7 +43,10 @@ jobs:
     continue-on-error: false
     needs: stage-lint-test
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Publish Helm charts
         uses: stefanprodan/helm-gh-pages@master
         with:
@@ -53,28 +56,33 @@ jobs:
           owner: sithanos
           repository: alucard
           branch: main
-          target_dir: stable          
+          target_dir: stable
 
-    # steps:
-    #   - name: Checkout
-    #     uses: actions/checkout@v3
-    #     with:
-    #       fetch-depth: 0
-
-    #   - name: Configure Git
-    #     run: |
-    #       git config user.name "$USER_NAME"
-    #       git config user.email "$USER_EMAIL"
-
-    #   - name: Install Helm
-    #     uses: azure/setup-helm@v4
-    #     env:
-    #       GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
-
-    #   - name: Run chart-releaser
-    #     uses: helm/chart-releaser-action@v1.6.0
-    #     with:          
-    #       charts_dir: charts/alucard
-    #       config: charts/assets/cr.yaml
-    #     env:
-    #       CR_TOKEN: "${{ secrets.USER_TOKEN }}"
+  # Fetch from ArtifactHub
+  stage-fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    continue-on-error: false
+    needs: stage-publisher
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "$USER_NAME"
+          git config user.email "$USER_EMAIL"
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:          
+          charts_dir: charts/alucard
+          config: charts/assets/cr.yaml
+        env:
+          CR_TOKEN: "${{ secrets.USER_TOKEN }}"
+  
