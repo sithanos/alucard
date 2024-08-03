@@ -26,7 +26,7 @@ kubeVersion: ">= 1.23.0-0"
 
 # Other Customizeable
 home: https://alucard.thanos.my.id
-icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
+icon: https://sithanos.github.io/alucard/assets/alucard.png
 
 # Keywords
 keywords:
@@ -58,7 +58,7 @@ annotations:
       description: Update values.yaml information
       links:
         - name: GitHub Repository
-          url: https://sithanos.github.io/alucard/charts/alucard/values.yaml
+          url: https://sithanos.github.io/alucard/alucard/values.yaml
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
@@ -73,7 +73,7 @@ annotations:
       email: hilmiafifi12@gmail.com    
   artifacthub.io/signKey: |
     fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
-    url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
+    url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
 
   # artifacthub.io/images: |
   #   - name: img1
