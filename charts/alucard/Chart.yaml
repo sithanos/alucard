@@ -10,34 +10,68 @@ description: A Helm chart to manage deployment Kubernetes
 # Library charts provide useful utilities or functions for the chart developer. They're included as
 # a dependency of application charts to inject those utilities and functions into the rendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
+type: infrastructure
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.1
+version: 1.0.2
+
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "alucard"
+kubeVersion: ">= 1.23.0-0"
+
+# Other Customizeable
+home: https://alucard.thanos.my.id
+icon: https://sithanos.github.io/alucard/stable/thanos.jpg
+
+# Keywords
+keywords:
+  - kubernetes
+  - helm
+  - alucard
+  - krew
+  - keptn
+  - container
+  - images
+  - argo
+  - flux
+  - google
+  - amazon
+  - chart
+  - thanos
+  - hilmi
+
+# Annotations
 annotations:
+  artifacthub.io/alternativeName: alucard
   artifacthub.io/category: integration-delivery
   artifacthub.io/changes: |
-    - kind: added
-      description: Add custom strategy 
     - kind: fixed
-      description: Minor update values.schema.json
+      description: Update some charts information
       links:
         - name: GitHub Repository
-          url: https://github.com/sithanos/alucard/blob/main/charts/alucard/values.schema.json
+          url: https://github.com/sithanos/alucard/blob/main/charts/alucard/Chart.yaml
+    - kind: added
+      description: Custom photos thanos.jpg
+      links:
+        - name: GitHub Repository
+          url: https://github.com/sithanos/alucard/blob/main/stable/thanos.jpg
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
-    - name: Official
+    - name: source
       url: https://sithanos.github.io/alucard
-    - name: Organization
-      url: https://alucard.thanos.my.id 
+    - name: support
+      url: https://thanos.my.id 
+  artifacthub.io/maintainers: |
+    - name: sithanos
+      email: hello@thanos.my.id
+    - name: xhilmi
+      email: hilmiafifi12@gmail.com    
   artifacthub.io/signKey: |
     fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
     url: https://keybase.io/xhilmi/pgp_keys.asc
