@@ -1,5 +1,9 @@
 name: Linting and Testing
-on: pull_request
+on:
+  push:
+    branches: "*"
+  pull_request:
+    branches: "*"
 
 permissions:
   contents: read
