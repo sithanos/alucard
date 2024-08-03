@@ -59,6 +59,11 @@ annotations:
       links:
         - name: GitHub Repository
           url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+    - kind: added
+      description: Replace file pgp_keys.asc
+      links:
+        - name: GitHub Repository
+          url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
@@ -73,7 +78,7 @@ annotations:
       email: hilmiafifi12@gmail.com    
   artifacthub.io/signKey: |
     fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
-    url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
+    url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
 
   # artifacthub.io/images: |
   #   - name: img1
