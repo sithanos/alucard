@@ -6,6 +6,56 @@ entries:
       artifacthub.io/category: integration-delivery
       artifacthub.io/changes: |
         - kind: fixed
+          description: Update Chart.yaml information
+          links:
+            - name: GitHub Repository
+              url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: source\n  url: https://sithanos.github.io/alucard\n-
+        name: support\n  url: https://thanos.my.id \n"
+      artifacthub.io/maintainers: "- name: sithanos\n  email: hello@thanos.my.id\n-
+        name: xhilmi\n  email: hilmiafifi12@gmail.com    \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
+    apiVersion: v2
+    appVersion: alucard
+    created: "2024-08-03T10:30:35.562403783Z"
+    description: A Helm chart to manage deployment Kubernetes
+    digest: c2179aa79e59301cd109468d7ad4f62197352524547c3713d8687dfb926468b1
+    home: https://alucard.thanos.my.id
+    icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
+    keywords:
+    - kubernetes
+    - helm
+    - alucard
+    - krew
+    - infrastructure
+    - container
+    - images
+    - argo
+    - flux
+    - google
+    - amazon
+    - chart
+    - thanos
+    - aws
+    - gcp
+    - application
+    - app
+    - microservice
+    kubeVersion: '>= 1.23.0-0'
+    name: alucard
+    type: application
+    urls:
+    - https://sithanos.github.io/alucard/stable/alucard-1.0.5.tgz
+    version: 1.0.5
+  - annotations:
+      artifacthub.io/alternativeName: alucard
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: |
+        - kind: fixed
           description: Update values.yaml information
           links:
             - name: GitHub Repository
@@ -198,4 +248,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T16:50:52.977121+07:00"
+generated: "2024-08-03T10:30:35.561107785Z"
