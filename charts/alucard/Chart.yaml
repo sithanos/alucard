@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.3
+version: 1.0.4
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -54,15 +54,10 @@ annotations:
   artifacthub.io/category: integration-delivery
   artifacthub.io/changes: |
     - kind: fixed
-      description: Update signKeys information
+      description: Update values.yaml information
       links:
         - name: GitHub Repository
-          url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
-    - kind: added
-      description: Replace file pgp_keys.asc
-      links:
-        - name: GitHub Repository
-          url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
+          url: https://sithanos.github.io/alucard/charts/alucard/values.yaml
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
