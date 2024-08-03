@@ -32,9 +32,9 @@ jobs:
   # Release into ArtifactHub
   stage-publisher:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: write
-    # continue-on-error: false
+    permissions:
+      contents: write
+    continue-on-error: false
     needs: stage-lint-test
     steps:
       - name: Checkout
@@ -44,9 +44,9 @@ jobs:
         with:
           token: ${{ secrets.USER_TOKEN }}
           charts_dir: charts
-          charts_url: https://sithanos.github.io/alucard
-          owner: sithanos
-          repository: alucard
+          # charts_url: https://sithanos.github.io/alucard
+          # owner: sithanos
+          # repository: alucard
           branch: main
           target_dir: stable
 
