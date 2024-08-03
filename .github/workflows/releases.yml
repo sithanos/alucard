@@ -58,7 +58,7 @@ jobs:
           git config --local user.email ${{ secrets.USER_EMAIL }}
           git config --local user.name ${{ secrets.USER_NAME }}          
           git tag "alucard-${{ steps.versioning.outputs.version }}"
-          git push origin "alucard-${{ steps.versioning.outputs.version }}"
+          git push -f origin "alucard-${{ steps.versioning.outputs.version }}"
 
       # - name: Package Helm Chart
       #   run: |
