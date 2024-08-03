@@ -1,4 +1,5 @@
 # Alucard Helm Charts
+## Nothing lasts forever, we can change the future.
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/alucard)](https://artifacthub.io/packages/search?repo=alucard)
 
 ## Overview
@@ -26,7 +27,7 @@ Welcome to Alucard the Universal Helm Chart repository! This Helm Chart is desig
 ## Installation
 
 ```bash
-helm repo add alucard https://privyinfra.github.io/alucard/stable/  
+helm repo add alucard https://sithanos.github.io/alucard/stable/  
 helm repo update
 helm install my-alucard alucard/alucard [--version=1.0.0]
 ```
