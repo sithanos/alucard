@@ -21,9 +21,9 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T11:43:49.912201058Z"
+    created: "2024-08-03T11:44:20.217467755Z"
     description: A Helm chart to manage deployment Kubernetes
-    digest: a1537c85eefa0d632071172641455d880dcff31f3d21755dc28440fdb60b197c
+    digest: 627c5350b8c8b47838945410622030408f66d6f8538ccdc1dc112cf947438260
     home: https://alucard.thanos.my.id
     icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
     keywords:
@@ -298,4 +298,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T11:43:49.91040851Z"
+generated: "2024-08-03T11:44:20.215753856Z"
