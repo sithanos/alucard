@@ -1,7 +1,7 @@
 owner: sithanos
-make-release-latest: true
-package-path: stable
-packages-with-index: true
-pages-branch: main
-skip-existing: true
-git-repo: alucard
+# make-release-latest: true
+# package-path: stable
+# packages-with-index: true
+# pages-branch: main
+# skip-existing: true
+# git-repo: alucard
