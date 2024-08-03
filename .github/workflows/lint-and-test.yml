@@ -1,15 +1,20 @@
-name: ArtifactHub Lint and Test
+name: ArtifactHub Release Charts
+
 on:
   push:
-    branches: "*"
+    branches:
+      - "*"
   pull_request:
-    branches: "*"
+    branches:
+      - "*"
 
 permissions:
   contents: read
 
 jobs:
-  lint-test:
+
+  # Lint and Test HelmCharts
+  stage-lint-test:
     runs-on: ubuntu-latest
     continue-on-error: false
     container:
@@ -21,3 +26,31 @@ jobs:
       - name: Run ah lint
         working-directory: ./charts/alucard
         run: ah lint
+
+  # Release into ArtifactHub
+  stage-publisher:
+    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
+    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$USER_NAME"
+          git config user.email "$USER_EMAIL"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        env:
+          CR_TOKEN: "${{ secrets.USER_TOKEN }}"
