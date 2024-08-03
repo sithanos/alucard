@@ -78,8 +78,8 @@ jobs:
 
       - name: Package Helm Chart
         run: |
-          helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
-          helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
+          cd ./stable && helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
+          cd ./stable && helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
