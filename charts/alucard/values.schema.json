@@ -1,0 +1,503 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "description": "Default values for alucard.",
+  "properties": {
+    "serviceAccount": {
+      "type": "object",
+      "description": "Configuration for the service account.",
+      "properties": {
+        "create": {
+          "type": "boolean",
+          "description": "Specifies whether a service account should be created.",
+          "default": true
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Annotations to add to the service account."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the service account to use. If not set and create is true, a name is generated using the fullname template.",
+          "default": ""
+        }
+      }
+    },
+    "podAnnotations": {
+      "type": "object",
+      "description": "Annotations to add to the pod."
+    },
+    "podSecurityContext": {
+      "type": "object",
+      "description": "Security context for the pod."
+    },
+    "securityContext": {
+      "type": "object",
+      "description": "Security context for the container."
+    },
+    "nodeSelector": {
+      "type": "object",
+      "description": "Node selector for pod scheduling."
+    },
+    "strategy": {
+      "type": "object",
+      "description": "Deployment strategy."
+    },
+    "tolerations": {
+      "type": "array",
+      "description": "Tolerations for pod scheduling.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "affinity": {
+      "type": "object",
+      "description": "Affinity rules for pod scheduling."
+    },
+    "nameOverride": {
+      "type": "string",
+      "description": "Overrides the name of the chart.",
+      "default": "alucard"
+    },
+    "fullnameOverride": {
+      "type": "string",
+      "description": "Overrides the full name of the chart.",
+      "default": "alucard"
+    },
+    "gracePeriodSeconds": {
+      "type": "object",
+      "description": "Grace period settings for pod termination.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether grace period is enabled.",
+          "default": true
+        },
+        "value": {
+          "type": "integer",
+          "description": "Value of the grace period in seconds.",
+          "default": 60
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "description": "Namespace configuration."
+    },
+    "env": {
+      "type": "object",
+      "description": "Environment variables for the container.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether environment variables are enabled.",
+          "default": false
+        },
+        "envvalue": {
+          "type": "object",
+          "description": "Environment variable values."
+        }
+      }
+    },
+    "secrets": {
+      "type": "object",
+      "description": "Secrets configuration.",
+      "properties": {
+        "configs": {
+          "type": "object",
+          "description": "Configuration secrets.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Specifies whether configuration secrets are enabled.",
+              "default": false
+            },
+            "autorestart": {
+              "type": "object",
+              "description": "Auto-restart settings for configuration secrets.",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Specifies whether auto-restart is enabled.",
+                  "default": false
+                }
+              }
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the configuration secrets.",
+              "default": "pathto/configs/alucard"
+            }
+          }
+        },
+        "creds": {
+          "type": "object",
+          "description": "Credential secrets.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Specifies whether credential secrets are enabled.",
+              "default": false
+            },
+            "autorestart": {
+              "type": "object",
+              "description": "Auto-restart settings for credential secrets.",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Specifies whether auto-restart is enabled.",
+                  "default": false
+                }
+              }
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the credential secrets.",
+              "default": "pathto/creds/alucard"
+            }
+          }
+        },
+        "additional": {
+          "type": "object",
+          "description": "Additional secrets configuration.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Specifies whether additional secrets are enabled.",
+              "default": false
+            },
+            "name": {
+              "type": "object",
+              "description": "Name of the additional secrets."
+            }
+          }
+        }
+      }
+    },
+    "volumes": {
+      "type": "array",
+      "description": "Volumes configuration.",
+      "items": {
+        "type": "object",
+        "description": "Volume definition."
+      }
+    },
+    "volumeMounts": {
+      "type": "array",
+      "description": "Volume mounts configuration.",
+      "items": {
+        "type": "object",
+        "description": "Volume mount definition."
+      }
+    },
+    "liveness": {
+      "type": "object",
+      "description": "Liveness probe configuration.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "description": "Port for the liveness probe.",
+          "default": 8000
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the liveness probe.",
+          "default": "tcpSocket"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path for the liveness probe.",
+          "default": "/ping"
+        },
+        "initialDelay": {
+          "type": "integer",
+          "description": "Initial delay for the liveness probe in seconds.",
+          "default": 30
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "Period for the liveness probe in seconds.",
+          "default": 10
+        },
+        "successThreshold": {
+          "type": "integer",
+          "description": "Success threshold for the liveness probe.",
+          "default": 1
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Failure threshold for the liveness probe.",
+          "default": 3
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "description": "Service configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the service.",
+          "default": "ClusterIP"
+        },
+        "configs": {
+          "type": "array",
+          "description": "Service port configurations.",
+          "items": {
+            "type": "object",
+            "description": "Service port configuration."
+          }
+        },
+        "headless": {
+          "type": "boolean",
+          "description": "Specifies whether the service is headless.",
+          "default": false
+        }
+      }
+    },
+    "imagePullSecrets": {
+      "type": "array",
+      "description": "Image pull secrets configuration.",
+      "items": {
+        "type": "object",
+        "description": "Image pull secret definition.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the image pull secret.",
+            "default": "gcr-json-key"
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "description": "Image configuration.",
+      "properties": {
+        "pullPolicy": {
+          "type": "string",
+          "description": "Image pull policy.",
+          "default": "IfNotPresent"
+        },
+        "repository": {
+          "type": "array",
+          "description": "Image repository.",
+          "items": {
+            "type": "object",
+            "description": "Image repository definition."
+          }
+        },
+        "tag": {
+          "type": "array",
+          "description": "Image tag.",
+          "items": {
+            "type": "object",
+            "description": "Image tag definition."
+          }
+        }
+      }
+    },
+    "interceptor": {
+      "type": "object",
+      "description": "Interceptor configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether the interceptor is enabled.",
+          "default": false
+        },
+        "args": {
+          "type": "string",
+          "description": "Arguments for the interceptor.",
+          "default": "echo 'test-interceptor'"
+        }
+      }
+    },
+    "migrations": {
+      "type": "object",
+      "description": "Migrations configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether migrations are enabled.",
+          "default": false
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of migrations.",
+          "default": "init-container"
+        },
+        "args": {
+          "type": "array",
+          "description": "Arguments for migrations.",
+          "items": {
+            "type": "string",
+            "description": "Migration argument.",
+            "default": "cd /opt/alucard ; envsubst < config/app.yaml.dist > config/app.yaml; echo 'Initializing Service...'"
+          }
+        },
+        "customImage": {
+          "type": "object",
+          "description": "Custom image for migrations.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Specifies whether a custom image is used for migrations.",
+              "default": false
+            },
+            "image": {
+              "type": "object",
+              "description": "Custom image definition.",
+              "properties": {
+                "repository": {
+                  "type": "array",
+                  "description": "Custom image repository.",
+                  "items": {
+                    "type": "object",
+                    "description": "Custom image repository definition."
+                  }
+                },
+                "tag": {
+                  "type": "array",
+                  "description": "Custom image tag.",
+                  "items": {
+                    "type": "object",
+                    "description": "Custom image tag definition."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "autoscaling": {
+      "type": "object",
+      "description": "Autoscaling configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether autoscaling is enabled.",
+          "default": false
+        },
+        "minReplicas": {
+          "type": "integer",
+          "description": "Minimum number of replicas for autoscaling.",
+          "default": 1
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "description": "Maximum number of replicas for autoscaling.",
+          "default": 2
+        },
+        "averageUtilMem": {
+          "type": "integer",
+          "description": "Average memory utilization for autoscaling.",
+          "default": 80
+        },
+        "averageUtilCpu": {
+          "type": "integer",
+          "description": "Average CPU utilization for autoscaling.",
+          "default": 80
+        }
+      }
+    },
+    "replicaCount": {
+      "type": "integer",
+      "description": "Number of replicas.",
+      "default": 1
+    },
+    "resources": {
+      "type": "object",
+      "description": "Resource requests and limits configuration.",
+      "properties": {
+        "limits": {
+          "type": "object",
+          "description": "Resource limits.",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU limit.",
+              "default": "400m"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory limit.",
+              "default": "256Mi"
+            }
+          }
+        },
+        "requests": {
+          "type": "object",
+          "description": "Resource requests.",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU request.",
+              "default": "300m"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory request.",
+              "default": "192Mi"
+            }
+          }
+        }
+      }
+    },
+    "ingress": {
+      "type": "object",
+      "description": "Ingress configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether ingress is enabled.",
+          "default": false
+        },
+        "configs": {
+          "type": "object",
+          "description": "Ingress configurations."
+        }
+      }
+    },
+    "annotations": {
+      "type": "object",
+      "description": "Annotations for various Kubernetes resources.",
+      "properties": {
+        "ingress": {
+          "type": "object",
+          "description": "Annotations for the ingress."
+        },
+        "deployment": {
+          "type": "object",
+          "description": "Annotations for the deployment."
+        },
+        "hpa": {
+          "type": "object",
+          "description": "Annotations for the horizontal pod autoscaler."
+        },
+        "preupgradejob": {
+          "type": "object",
+          "description": "Annotations for the pre-upgrade job.",
+          "properties": {
+            "helm.sh/hook": {
+              "type": "string",
+              "description": "Helm hook for the pre-upgrade job.",
+              "default": "pre-install,pre-upgrade"
+            },
+            "helm.sh/hook-weight": {
+              "type": "string",
+              "description": "Helm hook weight for the pre-upgrade job.",
+              "default": "-5"
+            },
+            "helm.sh/hook-delete-policy": {
+              "type": "string",
+              "description": "Helm hook delete policy for the pre-upgrade job.",
+              "default": "hook-succeeded"
+            }
+          }
+        }
+      }
+    }
+  }
+}
