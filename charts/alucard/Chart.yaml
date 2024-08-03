@@ -60,10 +60,10 @@ annotations:
         - name: GitHub Repository
           url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
     - kind: added
-      description: Replace file pgp_keys.asc
+      description: Replace some spacing inside
       links:
         - name: GitHub Repository
-          url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
+          url: https://sithanos.github.io/alucard/charts/alucard/values.yaml
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
