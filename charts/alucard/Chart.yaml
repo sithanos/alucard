@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.4
+version: 1.0.5
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -47,7 +47,7 @@ keywords:
   - gcp
   - application
   - app
-  - latest
+  - microservice
 
 # Annotations
 annotations:
@@ -55,10 +55,10 @@ annotations:
   artifacthub.io/category: integration-delivery
   artifacthub.io/changes: |
     - kind: fixed
-      description: Update values.yaml information
+      description: Update Chart.yaml information
       links:
         - name: GitHub Repository
-          url: https://sithanos.github.io/alucard/charts/alucard/values.yaml
+          url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
