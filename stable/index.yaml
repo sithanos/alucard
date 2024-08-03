@@ -21,7 +21,57 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T12:03:02.988913825Z"
+    created: "2024-08-03T13:41:07.45261584Z"
+    description: A Helm chart to manage deployment Kubernetes
+    digest: 79d7fe2daaa29703e599d96011c3f3747abbaa31f182654cb39375f878cd5023
+    home: https://alucard.thanos.my.id
+    icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
+    keywords:
+    - kubernetes
+    - helm
+    - alucard
+    - krew
+    - infrastructure
+    - container
+    - images
+    - argo
+    - flux
+    - google
+    - amazon
+    - chart
+    - thanos
+    - aws
+    - gcp
+    - application
+    - app
+    - microservice
+    kubeVersion: '>= 1.23.0-0'
+    name: alucard
+    type: application
+    urls:
+    - https://sithanos.github.io/alucard/stable/alucard-1.0.8.tgz
+    version: 1.0.8
+  - annotations:
+      artifacthub.io/alternativeName: alucard
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Update Chart.yaml information
+          links:
+            - name: GitHub Repository
+              url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: source\n  url: https://sithanos.github.io/alucard\n-
+        name: support\n  url: https://thanos.my.id \n"
+      artifacthub.io/maintainers: "- name: sithanos\n  email: hello@thanos.my.id\n-
+        name: xhilmi\n  email: hilmiafifi12@gmail.com    \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
+    apiVersion: v2
+    appVersion: alucard
+    created: "2024-08-03T13:41:07.45178993Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 3b24301cc568791bda3b63dfa4a214f1158a968b337315f43d4426ad97511398
     home: https://alucard.thanos.my.id
@@ -71,7 +121,7 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T10:32:59.782295555Z"
+    created: "2024-08-03T13:41:07.450084785Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 9f21106c9a366f752680b1909adb6bf678696ce5360a8370ce2c69edb4177032
     home: https://alucard.thanos.my.id
@@ -121,7 +171,7 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T16:50:52.980999+07:00"
+    created: "2024-08-03T13:41:07.449299442Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 774f8863d6addf24e10844022130a5dde6a60c1af35907558b67ae755775ee23
     home: https://alucard.thanos.my.id
@@ -176,7 +226,7 @@ entries:
         url: https://raw.githubusercontent.com/sithanos/alucard/main/charts/assets/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T16:50:52.980393+07:00"
+    created: "2024-08-03T13:41:07.448533635Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 52f818840602bdf1cfa5b5419111cd8f6f9aae0f4470ad256d3449fd31a1b921
     home: https://alucard.thanos.my.id
@@ -230,7 +280,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T16:50:52.979131+07:00"
+    created: "2024-08-03T13:41:07.447752309Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 57f183585a22b7e67f5e309f452d5deafe815d9f3cc47b7b28ff441fa1b5314d
     home: https://alucard.thanos.my.id
@@ -270,7 +320,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T16:50:52.978497+07:00"
+    created: "2024-08-03T13:41:07.446976383Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: db50a15e3077b4c7499e68bf64463b5119ce0089074a2a2b85230ebbb69b72d5
     name: alucard
@@ -290,7 +340,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T16:50:52.977882+07:00"
+    created: "2024-08-03T13:41:07.446229712Z"
     description: A Helm chart to manage deployment Kubernetes
     digest: 0585eec3e9d3746087bc67568d00ca674ac3796614877b436758b40db6517031
     name: alucard
@@ -298,4 +348,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T12:03:02.987945298Z"
+generated: "2024-08-03T13:41:07.445347646Z"
