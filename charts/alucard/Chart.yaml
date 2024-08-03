@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.2
+version: 1.0.3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -26,7 +26,7 @@ kubeVersion: ">= 1.23.0-0"
 
 # Other Customizeable
 home: https://alucard.thanos.my.id
-icon: https://sithanos.github.io/alucard/stable/thanos.jpg
+icon: https://sithanos.github.io/alucard/stable/alucard.png
 
 # Keywords
 keywords:
@@ -34,7 +34,7 @@ keywords:
   - helm
   - alucard
   - krew
-  - keptn
+  - infrastructure
   - container
   - images
   - argo
@@ -43,7 +43,10 @@ keywords:
   - amazon
   - chart
   - thanos
-  - hilmi
+  - aws
+  - gcp
+  - application
+  - app
 
 # Annotations
 annotations:
@@ -51,15 +54,15 @@ annotations:
   artifacthub.io/category: integration-delivery
   artifacthub.io/changes: |
     - kind: fixed
-      description: Update some charts information
+      description: Update keywords information
       links:
         - name: GitHub Repository
           url: https://github.com/sithanos/alucard/blob/main/charts/alucard/Chart.yaml
     - kind: added
-      description: Custom photos thanos.jpg
+      description: Custom photos alucard.png
       links:
         - name: GitHub Repository
-          url: https://github.com/sithanos/alucard/blob/main/stable/thanos.jpg
+          url: https://github.com/sithanos/alucard/blob/main/stable/alucard.png
   artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/license: MIT
   artifacthub.io/links: |
@@ -75,6 +78,7 @@ annotations:
   artifacthub.io/signKey: |
     fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
     url: https://keybase.io/xhilmi/pgp_keys.asc
+
   # artifacthub.io/images: |
   #   - name: img1
   #     image: repo/img1:1.0.0
