@@ -39,8 +39,6 @@ jobs:
       - name: Check Helm version
         run: helm version
 
-
-
       - name: Extract Version and Description from Chart.yaml
         id: versioning
         run: |
