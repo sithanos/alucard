@@ -1,7 +1,7 @@
 name: ArtifactHub Release Charts
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
