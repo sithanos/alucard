@@ -59,12 +59,6 @@ jobs:
         run: |
           cd ./stable
           helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
-      - name: Copy chart file
-        run: |
-          cp ${{ github.workspace }}/stable/alucard-${{ steps.versioning.outputs.version }}.tgz ./stable
-      - name: Update chart repo index in gh-pages branch
-        run: |
-          cd ./stable
           helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
           git config --local user.email "${{ secrets.USER_EMAIL }}"
           git config --local user.name "${{ secrets.USER_NAME }}"
