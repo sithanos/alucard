@@ -13,7 +13,6 @@ jobs:
     permissions:
       contents: write
     continue-on-error: false
-    needs: stage-lint-test
     steps:
     
       # Check out the code from the repository
