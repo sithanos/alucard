@@ -5,13 +5,6 @@ on:
     branches:
       - main
 
-# on:
-#   workflow_run:
-#     workflows: ["pages-build-deployment"]
-#     types: [completed]
-    # branches:
-    #   - main
-
 jobs:
   # Lint and Test HelmCharts
   stage-lint-test:
@@ -28,6 +21,53 @@ jobs:
       - name: Run ah lint
         working-directory: charts/alucard
         run: ah lint
+
+  # Release into ArtifactHub
+  stage-publisher:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    continue-on-error: false
+    needs: stage-lint-test
+    container:
+      image: alpine:latest
+      options: --user 1001
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Install required tools
+        run: |
+          apk update
+          apk add --no-cache git curl tar
+          curl -fsSL https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz | tar xzvf - -C /usr/local/bin/ --strip-components=1 linux-amd64/helm
+
+      - name: Extract Version from Chart.yaml
+        id: versioning
+        run: |
+          # Extract the version from Chart.yaml
+          current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')
+          
+          # Set the version as an output
+          echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
+          echo "::set-output name=version::$current_version"
+          
+      - name: Create Git Tag
+        run: |
+          git config --global user.email "$USER_EMAIL"
+          git config --global user.name "$USER_NAME"
+          git tag "v${{ steps.versioning.outputs.version }}"
+          git push origin "v${{ steps.versioning.outputs.version }}"
+
+      - name: Package Helm Chart
+        run: |
+          helm package --version ${{ steps.versioning.outputs.version }} charts/alucard
+          helm repo index --url tstable --merge index.yaml .
+          git add .
+          git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
+          git push https://${USER_NAME}:${USER_TOKEN}@${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
+
+          
         
   # Release into ArtifactHub
   stage-publisher:
@@ -39,23 +79,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # - name: Increment Version
-      #   id: versioning
-      #   run: |
-      #     #!/bin/bash
-      #     current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')
-      #     IFS='.' read -r major minor patch <<< "$current_version"
-      #     patch=$((patch))
-      #     new_version="${major}.${minor}.${patch}"
-      #     echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
-      #     echo "::set-output name=version::$new_version"
       - name: Extract Version from Chart.yaml
         id: versioning
         run: |
           # Extract the version from Chart.yaml
           current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')            
           # Set the version as an output
-          echo "NEW_VERSION=$current_version" >> $GITHUB_ENV
+          echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
           echo "::set-output name=version::$current_version"
       - name: Helm tool installer
         uses: Azure/setup-helm@v3
@@ -71,7 +101,6 @@ jobs:
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
-
           
   # # Release into ArtifactHub
   # stage-publisher:
@@ -93,8 +122,6 @@ jobs:
   #         # repository: alucard
   #         branch: main
   #         target_dir: stable
-
-
 
   # # Fetch from ArtifactHub
   # stage-fetch:
