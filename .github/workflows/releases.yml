@@ -65,7 +65,7 @@ jobs:
           helm repo index --url tstable --merge index.yaml .
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
-          git push https://${USER_NAME}:${USER_TOKEN}@${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
+          git push https://${USER_NAME}:${USER_TOKEN}@$GITHUB_SERVER_URL/$GITHUB_REPOSITORY
         
   # # Release into ArtifactHub
   # stage-publisher:
