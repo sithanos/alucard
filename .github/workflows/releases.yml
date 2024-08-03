@@ -31,7 +31,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
       - name: Run ah lint
-        working-directory: alucard
+        working-directory: charts/alucard
         run: ah lint
 
   # Release into ArtifactHub
