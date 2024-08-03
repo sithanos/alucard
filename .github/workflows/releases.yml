@@ -56,8 +56,8 @@ jobs:
         run: |
           git config --global user.email "$USER_EMAIL"
           git config --global user.name "$USER_NAME"
-          git tag "v${{ steps.versioning.outputs.version }}"
-          git push origin "v${{ steps.versioning.outputs.version }}"
+          git tag "alucard-${{ steps.versioning.outputs.version }}"
+          git push origin "alucard-${{ steps.versioning.outputs.version }}"
 
       - name: Package Helm Chart
         run: |
@@ -66,41 +66,39 @@ jobs:
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${USER_NAME}:${USER_TOKEN}@${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
-
-          
         
-  # Release into ArtifactHub
-  stage-publisher:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    continue-on-error: false
-    needs: stage-lint-test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Extract Version from Chart.yaml
-        id: versioning
-        run: |
-          # Extract the version from Chart.yaml
-          current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')            
-          # Set the version as an output
-          echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
-          echo "::set-output name=version::$current_version"
-      - name: Helm tool installer
-        uses: Azure/setup-helm@v3
-      - name: Check Helm version
-        run: helm version
-      - name: Package Helm Chart
-        run: |
-          cd ./stable
-          helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
-          helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
-          git config --local user.email ${{ secrets.USER_EMAIL }}
-          git config --local user.name ${{ secrets.USER_NAME }}
-          git add .
-          git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
-          git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
+  # # Release into ArtifactHub
+  # stage-publisher:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-lint-test
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Extract Version from Chart.yaml
+  #       id: versioning
+  #       run: |
+  #         # Extract the version from Chart.yaml
+  #         current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')            
+  #         # Set the version as an output
+  #         echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
+  #         echo "::set-output name=version::$current_version"
+  #     - name: Helm tool installer
+  #       uses: Azure/setup-helm@v3
+  #     - name: Check Helm version
+  #       run: helm version
+  #     - name: Package Helm Chart
+  #       run: |
+  #         cd ./stable
+  #         helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
+  #         helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
+  #         git config --local user.email ${{ secrets.USER_EMAIL }}
+  #         git config --local user.name ${{ secrets.USER_NAME }}
+  #         git add .
+  #         git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
+  #         git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
           
   # # Release into ArtifactHub
   # stage-publisher:
