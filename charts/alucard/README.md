@@ -1,4 +1,5 @@
 # Alucard Helm Charts
+## Nothing lasts forever, we can change the future.
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/alucard)](https://artifacthub.io/packages/search?repo=alucard)
 
 ## Overview

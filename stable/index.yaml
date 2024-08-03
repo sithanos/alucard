@@ -13,12 +13,12 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T10:40:01.018338+07:00"
+    created: "2024-08-03T10:48:24.348118+07:00"
     description: A Helm chart to manage deployment Kubernetes
-    digest: d2b76a9762c48193910f9de2f3ade3bd6532f95d4f05040f85372b3381cd1386
+    digest: 0585eec3e9d3746087bc67568d00ca674ac3796614877b436758b40db6517031
     name: alucard
     type: application
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T10:40:01.017219+07:00"
+generated: "2024-08-03T10:48:24.347286+07:00"

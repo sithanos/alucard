@@ -197,7 +197,7 @@ ingress:
     # - ingressName: "internal"
     #   className: "internal-nginx"
     #   rules:
-    #     - host: alucard.privyinfra.id
+    #     - host: alucard.thanos.my.id
     #       http:
     #         paths:
     #           - path: /rc(?:\/|$)(.*)
@@ -210,7 +210,7 @@ ingress:
     # - ingressName: "b2b-ingress"
     #   className: "internal-nginx"
     #   rules:
-    #     - host: alucard.privyinfra.id
+    #     - host: alucard.thanos.my.id
     #       http:
     #         - path: /(.*)
     #           pathType: Prefix
