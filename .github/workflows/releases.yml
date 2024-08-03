@@ -46,7 +46,7 @@ jobs:
       - name: Package Helm Chart
         run: |
           cd ./stable
-          helm package --version ${GITHUB_REF#refs/tags/} ./charts/alucard
+          helm package --version ${GITHUB_REF#refs/tags/} ../charts/alucard
       - name: Copy chart file
         run: |
           mkdir -p 
