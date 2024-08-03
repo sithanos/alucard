@@ -61,7 +61,6 @@ jobs:
           helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
       - name: Copy chart file
         run: |
-          mkdir -p 
           cp ${{ github.workspace }}/alucard-${{ steps.versioning.outputs.version }}.tgz ./stable
       - name: Update chart repo index in gh-pages branch
         run: |
