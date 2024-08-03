@@ -55,7 +55,7 @@ jobs:
 
       - name: Delete Existing Tag and Release if Exists
         run: |
-          tag_name="v${{ steps.versioning.outputs.version }}"
+          tag_name="alucard-${{ steps.versioning.outputs.version }}"
           release_id=$(curl -s -H "Authorization: token ${{ secrets.USER_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/$tag_name" | jq -r '.id')
           
           if [ "$release_id" != "null" ]; then
