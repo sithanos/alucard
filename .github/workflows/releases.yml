@@ -17,7 +17,7 @@ jobs:
       options: --user 1001
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Run ah lint
         working-directory: charts/alucard
         run: ah lint
@@ -70,4 +70,3 @@ jobs:
           config: charts/assets/cr.yaml
         env:
           CR_TOKEN: "${{ secrets.USER_TOKEN }}"
-  
