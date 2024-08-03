@@ -60,8 +60,8 @@ jobs:
           cd ./stable
           helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
           helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
-          git config --local user.email "$USER_EMAIL"
-          git config --local user.name "$USER_NAME"
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USER_NAME }}
           git add .
           git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
           git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git HEAD:main -
