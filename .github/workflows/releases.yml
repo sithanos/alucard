@@ -29,26 +29,26 @@ jobs:
         working-directory: charts/alucard
         run: ah lint
 
-  # Release into ArtifactHub
-  stage-publisher:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    continue-on-error: false
-    needs: stage-lint-test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Publish Helm charts
-        uses: stefanprodan/helm-gh-pages@master
-        with:
-          token: ${{ secrets.USER_TOKEN }}
-          charts_dir: charts
-          # charts_url: https://sithanos.github.io/alucard
-          # owner: sithanos
-          # repository: alucard
-          branch: main
-          target_dir: stable
+  # # Release into ArtifactHub
+  # stage-publisher:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-lint-test
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Publish Helm charts
+  #       uses: stefanprodan/helm-gh-pages@master
+  #       with:
+  #         token: ${{ secrets.USER_TOKEN }}
+  #         charts_dir: charts
+  #         # charts_url: https://sithanos.github.io/alucard
+  #         # owner: sithanos
+  #         # repository: alucard
+  #         branch: main
+  #         target_dir: stable
 
   # Fetch from ArtifactHub
   stage-fetch:
