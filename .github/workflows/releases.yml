@@ -50,7 +50,7 @@ jobs:
         uses: stefanprodan/helm-gh-pages@master
         with:
           token: ${{ secrets.USER_TOKEN }}
-          charts_dir: charts/alucard
+          charts_dir: charts
           charts_url: https://sithanos.github.io/alucard
           owner: sithanos
           repository: alucard
