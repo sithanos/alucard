@@ -1,4 +1,3 @@
 owner: sithanos
-git-repo: charts/alucard
 package-path: stable
 skip_existing: true
