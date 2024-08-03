@@ -1,0 +1,90 @@
+# name: ArtifactHub Release Charts
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+
+  # # Release into ArtifactHub
+  # stage-publisher:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-lint-test
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Extract Version from Chart.yaml
+  #       id: versioning
+  #       run: |
+  #         # Extract the version from Chart.yaml
+  #         current_version=$(grep '^version:' ./charts/alucard/Chart.yaml | awk '{print $2}')            
+  #         # Set the version as an output
+  #         echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
+  #         echo "::set-output name=version::$current_version"
+  #     - name: Helm tool installer
+  #       uses: Azure/setup-helm@v3
+  #     - name: Check Helm version
+  #       run: helm version
+  #     - name: Package Helm Chart
+  #       run: |
+  #         cd ./stable
+  #         helm package --version ${{ steps.versioning.outputs.version }} ../charts/alucard
+  #         helm repo index --url https://sithanos.github.io/alucard/stable --merge index.yaml .
+  #         git config --local user.email ${{ secrets.USER_EMAIL }}
+  #         git config --local user.name ${{ secrets.USER_NAME }}
+  #         git add .
+  #         git commit -m "feat: Update chart index with version ${{ steps.versioning.outputs.version }}"
+  #         git push https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/sithanos/alucard.git
+          
+  # # Release into ArtifactHub
+  # stage-publisher:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-lint-test
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Publish Helm charts
+  #       uses: stefanprodan/helm-gh-pages@master
+  #       with:
+  #         token: ${{ secrets.USER_TOKEN }}
+  #         charts_dir: charts
+  #         # charts_url: https://sithanos.github.io/alucard
+  #         # owner: sithanos
+  #         # repository: alucard
+  #         branch: main
+  #         target_dir: stable
+
+  # # Fetch from ArtifactHub
+  # stage-fetch:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   continue-on-error: false
+  #   needs: stage-publisher
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Configure Git
+  #       run: |
+  #         git config user.name "$USER_NAME"
+  #         git config user.email "$USER_EMAIL"
+  #     - name: Install Helm
+  #       uses: azure/setup-helm@v4
+  #       env:
+  #         USER_TOKEN: "${{ secrets.USER_TOKEN }}"
+  #     - name: Run chart-releaser
+  #       uses: helm/chart-releaser-action@v1.6.0
+  #       with:          
+  #         charts_dir: charts/alucard
+  #         config: charts/assets/cr.yaml
+  #       env:
+  #         CR_TOKEN: "${{ secrets.USER_TOKEN }}"
