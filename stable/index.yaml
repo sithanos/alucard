@@ -6,6 +6,60 @@ entries:
       artifacthub.io/category: integration-delivery
       artifacthub.io/changes: |
         - kind: fixed
+          description: Update path information
+          links:
+            - name: GitHub Repository
+              url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+        - kind: added
+          description: Custom photos alucard.png
+          links:
+            - name: GitHub Repository
+              url: https://sithanos.github.io/alucard/charts/assets/alucard.png
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: "- name: source\n  url: https://sithanos.github.io/alucard\n-
+        name: support\n  url: https://thanos.my.id \n"
+      artifacthub.io/maintainers: "- name: sithanos\n  email: hello@thanos.my.id\n-
+        name: xhilmi\n  email: hilmiafifi12@gmail.com    \n"
+      artifacthub.io/signKey: |
+        fingerprint: AF32A6DCD709EDCC90FF3AE159318371D898C7BE
+        url: https://sithanos.github.io/alucard/charts/alucard/Chart.yaml
+    apiVersion: v2
+    appVersion: alucard
+    created: "2024-08-03T13:00:50.343908+07:00"
+    description: A Helm chart to manage deployment Kubernetes
+    digest: 9b09b5455c8523a4e0f87bfff500115b7a70008874bd2be2babc854e26fcdf99
+    home: https://alucard.thanos.my.id
+    icon: https://sithanos.github.io/alucard/charts/assets/alucard.png
+    keywords:
+    - kubernetes
+    - helm
+    - alucard
+    - krew
+    - infrastructure
+    - container
+    - images
+    - argo
+    - flux
+    - google
+    - amazon
+    - chart
+    - thanos
+    - aws
+    - gcp
+    - application
+    - app
+    kubeVersion: '>= 1.23.0-0'
+    name: alucard
+    type: application
+    urls:
+    - https://sithanos.github.io/alucard/stable/alucard-1.0.4.tgz
+    version: 1.0.4
+  - annotations:
+      artifacthub.io/alternativeName: alucard
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/changes: |
+        - kind: fixed
           description: Update keywords information
           links:
             - name: GitHub Repository
@@ -26,7 +80,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T12:48:52.809412+07:00"
+    created: "2024-08-03T13:00:50.343096+07:00"
     description: A Helm chart to manage deployment Kubernetes
     digest: 1ea88962b38fc316f925169ff1b646374c71f3db54f1590bd6276f630a08aba0
     home: https://alucard.thanos.my.id
@@ -80,7 +134,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T12:48:52.806865+07:00"
+    created: "2024-08-03T13:00:50.34214+07:00"
     description: A Helm chart to manage deployment Kubernetes
     digest: 57f183585a22b7e67f5e309f452d5deafe815d9f3cc47b7b28ff441fa1b5314d
     home: https://alucard.thanos.my.id
@@ -120,7 +174,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T12:48:52.805925+07:00"
+    created: "2024-08-03T13:00:50.341045+07:00"
     description: A Helm chart to manage deployment Kubernetes
     digest: db50a15e3077b4c7499e68bf64463b5119ce0089074a2a2b85230ebbb69b72d5
     name: alucard
@@ -140,7 +194,7 @@ entries:
         url: https://keybase.io/xhilmi/pgp_keys.asc
     apiVersion: v2
     appVersion: alucard
-    created: "2024-08-03T12:48:52.80504+07:00"
+    created: "2024-08-03T13:00:50.340135+07:00"
     description: A Helm chart to manage deployment Kubernetes
     digest: 0585eec3e9d3746087bc67568d00ca674ac3796614877b436758b40db6517031
     name: alucard
@@ -148,4 +202,4 @@ entries:
     urls:
     - https://sithanos.github.io/alucard/stable/alucard-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-03T12:48:52.80383+07:00"
+generated: "2024-08-03T13:00:50.338862+07:00"
