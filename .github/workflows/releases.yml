@@ -1,9 +1,9 @@
 name: ArtifactHub Release Charts
 
-# on:
-#   pull_request:
-#     branches:
-#       - main
+on:
+  pull_request:
+    branches:
+      - main
 
 # on:
 #   workflow_run:
@@ -16,9 +16,9 @@ jobs:
   # Lint and Test HelmCharts
   stage-lint-test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    continue-on-error: false
+    # permissions:
+    #   contents: read
+    # continue-on-error: false
     container:
       image: artifacthub/ah
       options: --user 1001
@@ -32,9 +32,9 @@ jobs:
   # Release into ArtifactHub
   stage-publisher:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    continue-on-error: false
+    # permissions:
+    #   contents: write
+    # continue-on-error: false
     needs: stage-lint-test
     steps:
       - name: Checkout
@@ -53,10 +53,10 @@ jobs:
   # Fetch from ArtifactHub
   stage-fetch:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    continue-on-error: false
-    needs: stage-publisher
+    # permissions:
+    #   contents: write
+    # continue-on-error: false
+    # needs: stage-publisher
     steps:
       - name: Checkout
         uses: actions/checkout@v3
