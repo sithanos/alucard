@@ -60,7 +60,6 @@ jobs:
           charts_dir: charts/alucard
           config: charts/assets/cr.yaml
           mark_as_latest: true
-          packages_with_index: true
           pages_branch: main
           skip_existing: true
           skip_packaging: false
