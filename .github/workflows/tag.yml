@@ -21,7 +21,7 @@ jobs:
         id: versioning
         run: |
           # Extract the version from Chart.yaml (Change manually)
-          current_version=$(grep 'version: 1.0.6' stable/index.yaml | awk '{print $2}')
+          current_version=$(grep 'version: 1.0.9' stable/index.yaml | awk '{print $2}')
           # Extract the description from Chart.yaml
           description=$(grep '^description:' ./charts/alucard/Chart.yaml | sed 's/description: //')
           
