@@ -2,11 +2,11 @@
 name: ArtifactHub Publisher Charts
 
 on:
-  push:
+  # push:
     # branches:
     #   - main
-    paths-ignore:
-      - '.github/workflows/tag.yml'
+    # paths-ignore:
+    #   - '.github/workflows/tag.yml'
   workflow_run:
     workflows: ["pages-build-deployment"]
     types:
