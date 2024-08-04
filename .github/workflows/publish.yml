@@ -7,6 +7,10 @@ on:
       - main
     paths-ignore:
       - '.github/workflows/tag.yml'
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types:
+      - completed
 
 jobs:
   # Stage Lint and Test HelmCharts
