@@ -3,8 +3,8 @@ name: ArtifactHub Publisher Charts
 
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
     paths-ignore:
       - '.github/workflows/tag.yml'
   workflow_run:
