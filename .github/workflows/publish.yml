@@ -1,3 +1,4 @@
+# Define Workflows
 name: ArtifactHub Publisher Charts
 
 on:
